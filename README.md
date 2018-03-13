@@ -1,5 +1,5 @@
 # Task List in pure Javascript
 
-Project for practice DOM manipulation in pure Javascript.
+The classic taskList app for practicing DOM manipulation in pure Javascript.
 
 
