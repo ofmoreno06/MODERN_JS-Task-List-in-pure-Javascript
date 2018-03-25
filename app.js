@@ -13,7 +13,7 @@
 	}
 
 	function cleanNewTaskValue(){
-		return taskForm['new-task'].value = '';
+		taskForm['new-task'].value = '';
 	}
 
 	// ======================================
@@ -21,12 +21,15 @@
 	taskForm['add-task'].addEventListener('click', addTask);
 
 	function addTask(e){
-		// create new node <li>newTask <a>close</a></li>
-		// list.appendChild(node)
-	
-		console.log(getNewTaskValue());
+		list.appendChild(createTaskElement(getNewTaskValue()));	
 		cleanNewTaskValue();
 		e.preventDefault();	
+	}
+
+	function createTaskElement(task){
+		const li = document.createElement('li');
+		li.appendChild(document.createTextNode(task));
+		return li;
 	}
 
 })();
