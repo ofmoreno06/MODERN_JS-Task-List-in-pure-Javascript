@@ -1,15 +1,25 @@
 (function(){
 	'use strict';
 
-	// TODO: add local storage functionality
-
 	// ======================================
 	// declarations 
+	
 	const taskForm = document.querySelector('#add-task-form');	
 	const list = document.querySelector('#task-list');	
+	const tasks = getTasks();
+
+
+	// ======================================
+	// setup app
+	
+	tasks.forEach(task => {
+		list.appendChild(createTaskElement(task));	
+	});
+	
 
 	// ======================================
 	// newTask field
+	
 	function getNewTaskValue(){
 		return taskForm['new-task'].value;
 	}
@@ -18,6 +28,7 @@
 		taskForm['new-task'].value = '';
 	}
 
+
 	// ======================================
 	// addTask functionality
 
@@ -25,6 +36,8 @@
 
 	function addTask(e){
 		list.appendChild(createTaskElement(getNewTaskValue()));	
+		tasks.push(getNewTaskValue());
+		saveTasks(tasks);
 		cleanNewTaskValue();
 		e.preventDefault();	
 	}
@@ -42,16 +55,45 @@
 		return li;
 	}
 
+
 	// ======================================
 	// remove task functionality:
 	// - use 'Event Delegation', listening all events inside list and take action only when close icon is clicked.
 	
 	list.addEventListener('click', e => {
-		if (e.target.parentElement.classList.contains('remove-task'))
-			e.target.parentElement.parentElement.remove();
+		// click in svg
+		if (e.target.parentElement.classList.contains('remove-task')){
+			removeTask(e.target.parentElement.parentElement);
+		}
 
-		if (e.target.parentElement.parentElement.classList.contains('remove-task'))
-			e.target.parentElement.parentElement.parentElement.remove();
+		// click in path of svg
+		if (e.target.parentElement.parentElement.classList.contains('remove-task')){
+			removeTask(e.target.parentElement.parentElement.parentElement);
+		}
 	});
+
+	function removeTask(li){
+		li.remove();
+		tasks.splice(tasks.findIndex(task => task === li.textContent), 1);
+		saveTasks(tasks);
+	}
+	
+
+	// ======================================
+	// storage functionality
+	
+	function getTasks(){
+		if (localStorage.getItem('tasks'))
+			return JSON.parse(localStorage.getItem('tasks'));
+		else {
+			saveTasks([]);	
+			return JSON.parse(localStorage.getItem('tasks'));
+		}
+	}	
+
+	function saveTasks(tasks){
+		localStorage.setItem('tasks', JSON.stringify(tasks));	
+	}
+
 
 })();
