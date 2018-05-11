@@ -1,6 +1,6 @@
 # Task List in pure Javascript
 
-The classic taskList app for practicing DOM manipulation in pure pure Javascript (ES6).  
+The classic taskList in pure pure Javascript (ES6) without using any library or framework. 
 
 You can see the current state of the app [here](https://ofmoreno06.github.io/TaskList-in-pure-JS/).  
 
