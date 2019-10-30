@@ -2,7 +2,7 @@
 
 The classic taskList in pure pure Javascript (ES6) without using any library or framework. 
 
-You can see the current state of the app [here](https://ofmoreno06.github.io/TaskList-in-pure-JS/).  
+You can see the current state of the app [here](https://ofmorenor.github.io/TaskList-in-pure-JS/).  
 
 ### Features
 
